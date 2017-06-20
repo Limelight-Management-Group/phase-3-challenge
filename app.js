@@ -16,8 +16,8 @@ app.use( bodyParser.urlencoded( {
 } ) );
 
 
-app.get('/zero', (req, res) => {
-	res.render('index')
+app.get('/', (req, res) => {
+	res.send('0')
 })
 
 app.get('/add', (req, res) => {
