@@ -51,9 +51,14 @@ app.get('/', (req, res) => {
 
 
 
-app.get('/double/:number', (req, res) => {
-		res.render('index')
-})
+app.get('/double/' +'?'+':number', (req, res) => {
+	const num = req.params.number
+	const parsedNum = queryString.parse(num)
+	console.log(parsedNum.number)
+	const double = Number(parsedNum.number) * 2
+	console.log(double)
+	res.send(double.toString())
+	})
 
 
 
