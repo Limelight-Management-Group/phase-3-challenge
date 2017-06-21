@@ -2,7 +2,8 @@ const express = require( 'express' );
 const app = express();
 const bodyParser = require( 'body-parser' );
 const ejs = require( 'ejs' );
-
+var url = require('url');
+const queryString = require('query-string');
 
 
 
@@ -16,12 +17,19 @@ app.use( bodyParser.urlencoded( {
 } ) );
 
 
-app.get('/', (req, res) => {
+app.get('/zero', (req, res) => {
 	res.send('0')
 })
-
-app.get('/add', (req, res) => {
-	res.render('index')
+// var queryString = '?' + ':a'+'&' + ':b'
+app.get('/add/' +'?'+ ':a'+'&' + ':b', (req, res) => {
+	const A = req.params.a
+	const parsedA = queryString.parse(A)
+	const B = req.params.b
+	const parsedB = queryString.parse(B)
+	// numA = parseInt(parsedA)
+	// numB = parseInt(parsedB)
+	const value = Number(parsedA.a) + Number(parsedB.b)
+	res.send(value.toString())
 })
 
 app.get('/subtract', (req, res) => {
