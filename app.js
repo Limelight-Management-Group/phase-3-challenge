@@ -32,8 +32,15 @@ app.get('/add/' +'?'+ ':a'+'&' + ':b', (req, res) => {
 	res.send(value.toString())
 })
 
-app.get('/subtract', (req, res) => {
-	res.render('index')
+app.get('/subtract/' +'?'+ ':a'+'&' + ':b', (req, res) => {
+	const A = req.params.a
+	const parsedA = queryString.parse(A)
+	const B = req.params.b
+	const parsedB = queryString.parse(B)
+	// numA = parseInt(parsedA)
+	// numB = parseInt(parsedB)
+	const value = Number(parsedA.a) - Number(parsedB.b)
+	res.send(value.toString())
 })
 
 app.get('/', (req, res) => {
