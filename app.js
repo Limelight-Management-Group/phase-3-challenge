@@ -4,7 +4,7 @@ const bodyParser = require( 'body-parser' );
 const ejs = require( 'ejs' );
 var url = require('url');
 const queryString = require('query-string');
-
+const query = require('./database/grocery_store')
 
 
 // direct requests to the public directory
@@ -47,7 +47,13 @@ app.get('/', (req, res) => {
 	res.render('index')
 })
 
-
+app.post('/cart', (req, res) =>{
+	query.createTransaction(req.body)
+	.then(transaction => {
+		console.log(transaction)
+		res.render('index')
+	}).catch('error')
+})
 
 
 
@@ -62,8 +68,8 @@ app.get('/double/' +'?'+':number', (req, res) => {
 
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 app.listen(port, () =>{
-	console.log('the server is up, up and away')
+	console.log('the server is up, up and away on port: ', port)
 
 })
