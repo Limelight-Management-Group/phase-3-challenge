@@ -45,8 +45,12 @@ const query = {
 	},
 	mostRecentOrders(transactions){
 		db.any(`
-		SELECT DATE
-		`,[]
+		SELECT date_of_purchase, id
+		FROM groceryItems
+		WHERE date_of_purchase >= $1
+		ORDER BY date_of_purchase DESC
+
+		`,[transactions.date_of_purchase]
 		)
 	}
 }
