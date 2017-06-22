@@ -14,7 +14,26 @@ const query = {
 			VALUES($1, $2, $3)
 			`, [transaction.name, transaction.price, transaction.section])	
 			.catch(console.log)
-	}
+	},
+	itemsInSection(section){
+		console.log('this is the result of my section query', section)
+		let result = db.any(`
+			SELECT name, id
+			FROM groceryItems
+			where section =$1
+			`, [section.section]);
+		console.log(result)
+		return result
+	},
+	cheapItems(transactions){
+		db.any(`
+			SELECT price, id
+			FROM groceryItems
+			WHERE price <= '$10.00'
+			ORDER BY price DESC
+			`, [transactions.price])
+		.catch('error')
+	}, 
 }
 
 module.exports = query;
