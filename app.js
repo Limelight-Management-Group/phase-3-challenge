@@ -44,7 +44,11 @@ app.get('/subtract/' +'?'+ ':a'+'&' + ':b', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-	res.render('index')
+	query.getAll()
+	.then(transactions => {
+		console.log("I am in the transactions query", transactions)
+	res.render('index')	
+	})
 })
 
 app.post('/cart', (req, res) =>{
