@@ -24,7 +24,15 @@ const query = {
 			`, [section.section]);
 		console.log(result)
 		return result
-	} 
+	},
+	cheapItems(transactions){
+		db.any(`
+			SELECT price, id
+			FROM groceryItems
+			WHERE price <= '$10.00'
+			`, [transactions.price])
+		.catch('error')
+	}, 
 }
 
 module.exports = query;
