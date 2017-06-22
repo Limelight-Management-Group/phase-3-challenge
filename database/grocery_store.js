@@ -29,11 +29,20 @@ const query = {
 		db.any(`
 			SELECT price, id
 			FROM groceryItems
-			WHERE price <= '$10.00'
+			WHERE price =< $1
 			ORDER BY price DESC
 			`, [transactions.price])
 		.catch('error')
-	}, 
+	},
+	countItemsInSection(section){
+		db.any(`
+			SELECT name, COUNT(section)
+			FROM groceryItems
+			WHERE section = $1
+			GROUP BY name
+		`, [section.section])
+		.catch('error')
+	} 
 }
 
 module.exports = query;
