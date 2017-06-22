@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
 app.post('/cart', (req, res) =>{
 	query.createTransaction(req.body)
 	.then(transaction => {
-		console.log(transaction)
+		console.log('this is the transaction', transaction)
 		res.render('index')
 	}).catch('error')
 })

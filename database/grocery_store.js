@@ -10,9 +10,9 @@ const query = {
 	createTransaction(transaction){
 		console.log('this is the transaction', transaction)
 		return db.any(`
-			INSERT INTO groceryItems(name, price, section)
-			VALUES($1, $2, $3)
-			`, [transaction.name, transaction.price, transaction.section])	
+			INSERT INTO groceryItems(name, price, section, date_of_purchase)
+			VALUES($1, $2, $3, $4)
+			`, [transaction.name, transaction.price, transaction.section, transaction.date_of_purchase])	
 			.catch(console.log)
 	},
 	itemsInSection(section){
@@ -42,7 +42,13 @@ const query = {
 			GROUP BY name
 		`, [section.section])
 		.catch('error')
-	} 
+	},
+	mostRecentOrders(transactions){
+		db.any(`
+		SELECT DATE
+		`,[]
+		)
+	}
 }
 
 module.exports = query;
