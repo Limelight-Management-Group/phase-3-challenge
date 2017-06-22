@@ -8,7 +8,8 @@ id SERIAL PRIMARY KEY,
 name VARCHAR(30) NOT NULL UNIQUE,
 price NUMERIC(3,2), 
 section TEXT,
-date_of_purchase DATE 
+date_of_purchase DATE,
+shopperName VARCHAR
 );
 
 DROP TABLE IF EXISTS shoppers;
