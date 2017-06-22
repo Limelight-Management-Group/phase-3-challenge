@@ -10,9 +10,9 @@ const query = {
 	createTransaction(transaction){
 		console.log('this is the transaction', transaction)
 		return db.any(`
-			INSERT INTO groceryItems(name, price, section, date_of_purchase, shopperName)
-			VALUES($1, $2, $3, $4, $5)
-			`, [transaction.name, transaction.price, transaction.section, transaction.date_of_purchase, transaction.shopperName])	
+			INSERT INTO groceryItems(name, price, section, name2, price2, section2, name3, price3, section3, date_of_purchase)
+			VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+			`, [transaction.name, transaction.price, transaction.section, transaction.name2, transaction.price2, transaction.section2, transaction.name3, transaction.price3, transaction.section3, transaction.date_of_purchase])	
 			.catch(console.log)
 	},
 	itemsInSection(section){
@@ -57,6 +57,14 @@ const query = {
 		SELECT MAX(shopperName) as name
 		FROM groceryItems
 		`)
+		.catch('error')
+	},
+	orderTotal(ID){
+		db.one(`
+			SELECT id, price
+			FROM groceryItems
+
+		`,[])
 		.catch('error')
 	}
 }
