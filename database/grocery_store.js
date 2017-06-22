@@ -10,9 +10,9 @@ const query = {
 	createTransaction(transaction){
 		console.log('this is the transaction', transaction)
 		return db.any(`
-			INSERT INTO groceryItems(name, price, section)
-			VALUES($1, $2, $3)
-			`, [transaction.name, transaction.price, transaction.section])	
+			INSERT INTO groceryItems(name, price, section, date_of_purchase)
+			VALUES($1, $2, $3, $4)
+			`, [transaction.name, transaction.price, transaction.section, transaction.date_of_purchase])	
 			.catch(console.log)
 	},
 	itemsInSection(section){
@@ -29,11 +29,26 @@ const query = {
 		db.any(`
 			SELECT price, id
 			FROM groceryItems
-			WHERE price <= '$10.00'
+			WHERE price =< $1
 			ORDER BY price DESC
 			`, [transactions.price])
 		.catch('error')
-	}, 
+	},
+	countItemsInSection(section){
+		db.any(`
+			SELECT name, COUNT(section)
+			FROM groceryItems
+			WHERE section = $1
+			GROUP BY name
+		`, [section.section])
+		.catch('error')
+	},
+	mostRecentOrders(transactions){
+		db.any(`
+		SELECT DATE
+		`,[]
+		)
+	}
 }
 
 module.exports = query;
