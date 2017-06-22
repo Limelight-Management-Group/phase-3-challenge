@@ -54,9 +54,9 @@ const query = {
 	},
 	lastShopperName(shopper){
 		db.one(`
-		SELECT name
-		FROM 
-		`, [])
+		SELECT MAX(shopperName) as name
+		FROM groceryItems
+		`)
 		.catch('error')
 	}
 }
