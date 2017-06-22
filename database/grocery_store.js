@@ -30,6 +30,7 @@ const query = {
 			SELECT price, id
 			FROM groceryItems
 			WHERE price <= '$10.00'
+			ORDER BY price DESC
 			`, [transactions.price])
 		.catch('error')
 	}, 
