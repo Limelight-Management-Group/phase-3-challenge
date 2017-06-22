@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS groceryItems;
 CREATE TABLE groceryItems (
 id SERIAL PRIMARY KEY,
 name VARCHAR(30) NOT NULL UNIQUE,
-price INTEGER, 
-section TEXT
+price NUMERIC(3,2), 
+section TEXT 
 );
 
 DROP TABLE IF EXISTS shoppers;
@@ -18,6 +18,7 @@ shopperName VARCHAR(30) NOT NULL UNIQUE
 
 DROP TABLE IF EXISTS shoppersOrders;
 CREATE TABLE shoppersOrders(
+date_of_purchase TIMESTAMP,
 ItemId INTEGER,
 ShopperId INTEGER,
 FOREIGN KEY (ItemId) REFERENCES groceryItems(id),
