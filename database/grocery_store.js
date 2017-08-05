@@ -59,12 +59,13 @@ const query = {
 		`)
 		.catch('error')
 	},
-	orderTotal(ID){
+	orderTotal(transactionId){
+		console.log(transactionId)
 		db.one(`
-			SELECT id, price
+			SELECT *
 			FROM groceryItems
-
-		`,[])
+			WHERE transactionID = $1
+		`,[transactionId.transactionID])
 		.catch('error')
 	}
 }

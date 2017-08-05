@@ -44,12 +44,14 @@ app.get('/subtract/' +'?'+ ':a'+'&' + ':b', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-	query.getAll()
-	.then(transactions => {
-		console.log("I am in the transactions query", transactions)
+	query.orderTotal(req.body)
+	.then(price => {
+		console.log("I am in the transactions query", price)
 	res.render('index')	
 	})
 })
+
+
 
 app.post('/cart', (req, res) =>{
 	query.createTransaction(req.body)
@@ -61,7 +63,7 @@ app.post('/cart', (req, res) =>{
 
 
 
-app.get('/double/' +'?'+':number', (req, res) => {
+app.get('/double/:number', (req, res) => {
 	const num = req.params.number
 	const parsedNum = queryString.parse(num)
 	console.log(parsedNum.number)
