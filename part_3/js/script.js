@@ -61,6 +61,13 @@ function openModal(){
 							console.log('pushed', price)
 							console.log('this is price arr', priceArr)
 
+							priceArr.map((listItemPrice) =>{
+								var newLi = document.createElement("li");
+								newLi.innerHTML = listItemPrice 
+								console.log('this is the list Item Price --->',listItemPrice)
+								var currentDiv = document.querySelector("#price"); 
+  								currentDiv.append(newLi);
+							})
 
 							let RegArr = priceArr.toString()
 							const regie = /\$/g
